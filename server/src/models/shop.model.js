@@ -41,8 +41,10 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   shop.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    shop.belongsTo(models.parser, {
+      foreignKey: 'parserId',
+      as: 'shopParser'
+    });
   };
 
   return shop;
