@@ -6,9 +6,42 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const product = sequelizeClient.define('product', {
-    text: {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    imageSrc: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    shopId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    categoryId: {
+      type: DataTypes.UUID,
+      allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     hooks: {
