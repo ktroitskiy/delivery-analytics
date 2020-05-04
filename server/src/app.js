@@ -10,6 +10,7 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
+const customMethods = require('feathers-custom-methods');
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -47,6 +48,12 @@ app.configure(authentication);
 app.configure(services);
 // Set up event channels (see channels.js)
 app.configure(channels);
+
+app.configure(customMethods({
+  methods: {
+    shop: ['parse']  // allow calling app.service('shop').parse
+  }
+}));
 
 // Configure a middleware for 404s and the error handler
 app.use(express.notFound());

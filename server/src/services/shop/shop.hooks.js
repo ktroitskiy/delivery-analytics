@@ -6,6 +6,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
+    parse: [],
     remove: []
   },
 
@@ -16,6 +17,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
+    parse: [],
     remove: []
   },
 
@@ -26,6 +28,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
+    parse: [],
     remove: []
   }
 };

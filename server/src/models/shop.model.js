@@ -20,6 +20,10 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    parserId: {
+      type: Sequelize.UUID,
+      allowNull: false
+    },
     createdAt: {
       type: DataTypes.DATE
     },
