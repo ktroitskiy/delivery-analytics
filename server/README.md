@@ -21,3 +21,13 @@ $ sequelize migration:create --name=""     # Create migration
 $ sequelize db:migrate                     # Apply migrations
 $ sequelize db:migrate:undo                # Downgrade last migration
 $ sequelize db:migrate:undo:all            # Downgrade all migrations
+```
+
+## DB seeders
+
+```
+$ sequelize seed:generate --name="users-seed"   # Create seed
+$ sequelize db:seed:all                         # Apply seeds
+$ sequelize db:seed:undo                        # Downgrade last seed
+$ sequelize db:seed:undo:all                    # Downgrade all seeds
+```

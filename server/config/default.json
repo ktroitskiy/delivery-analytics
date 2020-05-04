@@ -8,12 +8,17 @@
   },
   "authentication": {
     "entity": "user",
-    "service": "users",
+    "service": "user",
     "secret": "6sPAnvtuEg5uN2G1UAQ1XE3CnU4=",
     "authStrategies": [
       "jwt",
       "local"
     ],
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    },
     "jwtOptions": {
       "header": {
         "typ": "access"
