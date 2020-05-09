@@ -51,7 +51,9 @@
     "feathers-custom-methods": "0.0.2",
     "feathers-sequelize": "^6.1.0",
     "helmet": "^3.22.0",
+    "lodash": "^4.17.15",
     "pg": "^8.0.3",
+    "python-shell": "^2.0.0",
     "sequelize": "^5.21.7",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"

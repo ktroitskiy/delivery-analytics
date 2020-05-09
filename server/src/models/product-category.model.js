@@ -16,6 +16,14 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    shopId: {
+      type: Sequelize.UUID,
+      allowNull: false
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     createdAt: {
       type: DataTypes.DATE
     },
@@ -37,8 +45,10 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   productCategory.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    productCategory.belongsTo(models.parser, {
+      foreignKey: 'shopId',
+      as: 'shop'
+    });
   };
 
   return productCategory;
