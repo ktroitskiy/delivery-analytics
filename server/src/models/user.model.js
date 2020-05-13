@@ -5,8 +5,21 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const users = sequelizeClient.define('users', {
-  
+  const user = sequelizeClient.define('user', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -16,14 +29,11 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-  
-  
-    auth0Id: { type: DataTypes.STRING },
-  
-    googleId: { type: DataTypes.STRING },
-  
-    facebookId: { type: DataTypes.STRING },
-  
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
+    }
   }, {
     hooks: {
       beforeCount(options) {
@@ -33,10 +43,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  users.associate = function (models) {
+  user.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return users;
+  return user;
 };

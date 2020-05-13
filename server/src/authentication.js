@@ -5,7 +5,17 @@ const { expressOauth } = require('@feathersjs/authentication-oauth');
 module.exports = app => {
   const authentication = new AuthenticationService(app);
 
-  authentication.register('jwt', new JWTStrategy());
+  const localConfig = {
+    'entity': 'user',
+    'service': 'user',
+    'usernameField': 'email',
+    'passwordField': 'password'
+  }; 
 
-  app.use('/authentication', authentication);
+  // const local = 
+
+  // authentication.register('jwt', new JWTStrategy());
+  // authentication.register('local', new LocalStrategy(localConfig));
+
+  // app.use('/authentication', authentication);
 };
