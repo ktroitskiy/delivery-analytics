@@ -142,8 +142,6 @@ categories = [
 
 base_url = 'https://www.sushibank.ru'
 
-result = {}
-
 for i in range(len(categories)):
 
   category = categories[i]
@@ -152,6 +150,6 @@ for i in range(len(categories)):
 
   categories[i]['products'] = productsList
 
-  print(category['name'] + '......OK')
 
-print(categories)
+result = json.dumps(categories)
+print(result)
