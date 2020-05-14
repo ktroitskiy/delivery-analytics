@@ -9,15 +9,23 @@ import * as serviceWorker from "./serviceWorker";
 import { LayoutProvider } from "./context/LayoutContext";
 import { UserProvider } from "./context/UserContext";
 
+import { Provider } from 'react-redux';
+import { store, history } from 'store/store';
+import { ConnectedRouter } from 'connected-react-router'
+
 ReactDOM.render(
-  <LayoutProvider>
-    <UserProvider>
-      <ThemeProvider theme={Themes.default}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </UserProvider>
-  </LayoutProvider>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <LayoutProvider>
+        <UserProvider>
+          <ThemeProvider theme={Themes.default}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </UserProvider>
+      </LayoutProvider>
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById("root"),
 );
 
