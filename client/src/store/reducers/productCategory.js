@@ -1,0 +1,30 @@
+import types from '../constants/productCategory'
+
+const initialState = {
+  list: {},
+  total: null,
+  error: null
+}
+
+export default (state = initialState, action) => {
+
+  switch (action.type) {
+
+  case types.PRODUCT_CATEGORY_GET_ALL_SUCCESS:
+    return {
+      ...state,
+      list: action.payload.data,
+      total: action.payload.total
+    }
+
+  case types.PRODUCT_CATEGORY_GET_ALL_FAILURE: {
+    return {
+      ...state,
+      error: action.payload
+    }
+  }
+
+  default:
+    return state
+  }
+}
