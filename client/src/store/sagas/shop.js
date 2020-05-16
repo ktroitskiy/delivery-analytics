@@ -1,15 +1,13 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import _ from 'lodash'
 
 import types from '../constants/shop'
 import * as shopActions from '../actions/shop'
 import backend from 'store/api/feathers'
 
 function* getAll(action) {
-
   try {
-    const shops = yield backend.service('shop').find({
-      query: {}
-    })
+    const shops = yield backend.service('shop').find()
 
     yield put(shopActions.getAllSuccess(shops))
 
@@ -18,8 +16,45 @@ function* getAll(action) {
   }
 }
 
+function* getAllProductCategories(action) {
+  try {
+    const shopId = action.payload
+    const productCategories = yield backend.service('product-category').find({
+      query: {
+        shopId
+      }
+    })
+
+    yield put(shopActions.getAllProductCategoriesSuccess(shopId, productCategories.data))
+  } catch (e) {
+    console.log(e)
+    yield put(shopActions.getAllProductCategoriesFailure(e))
+  }
+}
+
+function* getAllProductsByCategory(action) {
+  try {
+    const shopId = action.payload.shopId
+    const categoryId = action.payload.categoryId
+
+    const products = yield backend.service('product').find({
+      query: {
+        shopId,
+        categoryId
+      }
+    })
+    console.log(products)
+    yield put(shopActions.getAllProductsByCategorySuccess(shopId, categoryId, products))
+  } catch (e) {
+    console.log(e)
+    yield put(shopActions.getAllProductsByCategoryFailure(e))
+  }
+}
+
 function* shopSaga() {
   yield takeEvery(types.SHOP_GET_ALL, getAll)
+  yield takeEvery(types.SHOP_GET_ALL_PRODUCT_CATEGORIES, getAllProductCategories)
+  yield takeEvery(types.SHOP_GET_ALL_PRODUCTS_BY_CATEGORY, getAllProductsByCategory)
 }
 
 export default shopSaga

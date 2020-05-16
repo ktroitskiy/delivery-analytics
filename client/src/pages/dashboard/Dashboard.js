@@ -1,20 +1,22 @@
-import React from "react";
-import { Grid } from "@material-ui/core";
-import { useSelector } from "react-redux"
+import React from 'react'
+import { Grid } from '@material-ui/core'
+import { useSelector } from 'react-redux'
 import _ from 'lodash'
 
-import useStyles from "./styles";
+import useStyles from './styles'
 
-import Widget from "../../components/Widget";
-import PageTitle from "../../components/PageTitle";
-import { Typography } from "../../components/Wrappers";
+import Widget from 'components/Widget/Widget'
+import PageTitle from 'components/PageTitle/PageTitle'
+import { Typography } from 'components/Wrappers/Wrappers'
 
 export default function Dashboard(props) {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const totalShops = useSelector((state) => _.get(state, 'shop.total'))
-  const totalProductCategories = useSelector((state) => _.get(state, 'productCategory.total'))
-  const totalProducts = useSelector((state) => _.get(state, 'product.total'))
+  const totalShops = useSelector(state => _.get(state, 'shop.total'))
+  const totalProductCategories = useSelector(state =>
+    _.get(state, 'productCategory.total'),
+  )
+  const totalProducts = useSelector(state => _.get(state, 'product.total'))
 
   return (
     <>
@@ -26,6 +28,7 @@ export default function Dashboard(props) {
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
+            disableWidgetMenu
           >
             <div className={classes.visitsNumberContainer}>
               <Typography size="xl" weight="medium">
@@ -55,7 +58,7 @@ export default function Dashboard(props) {
         </Grid>
       </Grid>
     </>
-  );
+  )
 }
 
 // #######################################################################
@@ -79,4 +82,3 @@ export default function Dashboard(props) {
 //     return { value: randomValue };
 //   });
 // }
-

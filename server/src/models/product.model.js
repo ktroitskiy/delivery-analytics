@@ -55,6 +55,10 @@ module.exports = function (app) {
   product.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    product.hasMany(models.productVariation, {
+      foreignKey: 'productId',
+      as: 'productVariation'
+    });
   };
 
   return product;

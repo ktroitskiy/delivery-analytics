@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   Paper,
   IconButton,
   Menu,
   MenuItem,
   Typography,
-} from "@material-ui/core";
-import { MoreVert as MoreIcon } from "@material-ui/icons";
-import classnames from "classnames";
+} from '@material-ui/core'
+import { MoreVert as MoreIcon } from '@material-ui/icons'
+import classnames from 'classnames'
 
 // styles
-import useStyles from "./styles";
+import useStyles from './styles'
 
-export default function Widget({
+const Widget = ({
   children,
   title,
   noBodyPadding,
@@ -20,12 +20,11 @@ export default function Widget({
   disableWidgetMenu,
   header,
   ...props
-}) {
-  var classes = useStyles();
+}) => {
+  const classes = useStyles()
 
-  // local
-  var [moreButtonRef, setMoreButtonRef] = useState(null);
-  var [isMoreMenuOpen, setMoreMenuOpen] = useState(false);
+  const [moreButtonRef, setMoreButtonRef] = useState(null)
+  const [isMoreMenuOpen, setMoreMenuOpen] = useState(false)
 
   return (
     <div className={classes.widgetWrapper}>
@@ -83,5 +82,7 @@ export default function Widget({
         </MenuItem>
       </Menu>
     </div>
-  );
+  )
 }
+
+export default Widget
