@@ -82,16 +82,48 @@ const Shop = props => {
     </Grid>
   )
 
-  const renderCategoryAnalytics = () => {
-    const productsSortedByHighPrice = sortByHighPrice(categoryProducts, 10)
-    const productsSortedByLowPrice = sortByLowPrice(categoryProducts, 10)
+  const renderProductComposition = productVariations =>
+    _.map(productVariations, variation => {
+      return (
+        <div className="product-composition-variant">{variation.composition}</div>
+      )
+    })
 
+  const renderProduct = product => {
+    return (
+      <div key={product.id} className="product-card-wrapper">
+        <div className="product-image">
+          <img src={product.imageSrc} alt="" />
+          <div className="product-body">
+            <div className="product-name">{product.name}</div>
+            <div className="product-composition">
+              {renderProductComposition(product.productVariation)}
+            </div>
+          </div>
+          <div className="product-price"></div>
+        </div>
+      </div>
+    )
+  }
+
+  const renderCategoryAnalytics = () => {
+    const productsSortedByHighPrice = sortByHighPrice(categoryProducts, categoryProducts.length / 2)
+    const productsSortedByLowPrice = sortByLowPrice(categoryProducts, categoryProducts.length / 2)
+    console.log(productsSortedByHighPrice, productsSortedByLowPrice)
     return (
       <Grid container spacing={4}>
         <Grid item lg={6} md={6} sm={12} xs={12}>
           <Widget disableWidgetMenu>
+            <Typography>Самые доступные товары</Typography>
+            {_.map(productsSortedByLowPrice, product => renderProduct(product))}
+          </Widget>
+        </Grid>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Widget disableWidgetMenu>
             <Typography>Самые дорогие товары</Typography>
-            
+            {_.map(productsSortedByHighPrice, product =>
+              renderProduct(product),
+            )}
           </Widget>
         </Grid>
       </Grid>

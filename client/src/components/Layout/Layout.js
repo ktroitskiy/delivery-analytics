@@ -24,15 +24,15 @@ import { useLayoutState } from 'context/LayoutContext'
 function Layout(props) {
   const dispatch = useDispatch()
 
-  const shops = useSelector(state => _.get(state, 'shop.list'))
-  const productCategories = useSelector(state => _.get(state, 'productCategory.list'))
-  const products = useSelector(state => _.get(state, 'product.list'))
+  const shopsTotal = useSelector(state => _.get(state, 'shop.total'))
+  const productCategoriesTotal = useSelector(state => _.get(state, 'productCategory.total'))
+  const productsTotal = useSelector(state => _.get(state, 'product.total'))
 
   useEffect(() => {
-    !_.size(shops) && dispatch(shopActions.getAll())
-    !_.size(productCategories) && dispatch(productCategoryActions.getAll())
-    !_.size(products) && dispatch(productActions.getAll())
-  })
+    _.isNil(shopsTotal) && dispatch(shopActions.getAll())
+    _.isNil(productCategoriesTotal) && dispatch(productCategoryActions.getAll())
+    _.isNil(productsTotal) && dispatch(productActions.getAll())
+  }, [])
 
   var classes = useStyles()
 
