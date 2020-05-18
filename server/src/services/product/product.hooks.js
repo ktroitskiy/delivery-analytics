@@ -5,7 +5,7 @@ module.exports = {
     all: [ ],
     find: [
       async hook => {
-        const { app, data, params } = hook;
+        const { app, params } = hook;
         const sequelizeClient = await app.get('sequelizeClient');
         const {
           product: productModel,
@@ -14,6 +14,8 @@ module.exports = {
         } = sequelizeClient.models;
 
         const query = params.query;
+
+        if(!_.size(query)) return hook;
 
         const result = await productModel.findAll({
           where: query,

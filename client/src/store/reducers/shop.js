@@ -38,6 +38,28 @@ export default (state = initialState, action) => {
         list: newShopList,
       }
     }
+    
+    case types.SHOP_GET_ANALITICS_SUCCESS: {
+      let analiticsData = {}
+
+      _.map(action.payload.data, (analitics) => {
+        analiticsData = {
+          [analitics.name]: analitics.analiticsData
+        }
+      })
+
+      return {
+        ...state,
+        list: { 
+          ...state.list,
+          [action.payload.shopId]: {
+            analitics: {
+              ...analiticsData
+            }
+          }
+        } 
+      }
+    }
 
     case types.SHOP_GET_ALL_FAILURE:
     case types.SHOP_GET_ALL_PRODUCT_CATEGORIES_FAILURE: {

@@ -72,3 +72,29 @@ export const getAllProductsByCategoryFailure = error => {
     payload: error
   }
 }
+
+export const getShopAnalitics = (shopId) => {
+  return {
+    type: types.SHOP_GET_ANALITICS,
+    payload: {
+      shopId
+    }
+  }
+}
+
+export const getShopAnaliticsSuccess = (shopId, data) => {
+  return {
+    type: types.SHOP_GET_ANALITICS_SUCCESS,
+    payload: {
+      shopId,
+      data
+    }
+  }
+}
+
+export const getShopAnaliticsFailure = error => {
+  return {
+    type: types.SHOP_GET_ANALITICS_FAILURE,
+    payload: error
+  }
+}

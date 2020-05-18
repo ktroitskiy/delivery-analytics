@@ -10,10 +10,12 @@ import PageTitle from 'components/PageTitle/PageTitle'
 import Widget from 'components/Widget/Widget'
 import { Typography } from 'components/Wrappers/Wrappers'
 
+import SortByPrice from './SortByPriceTable' 
+import CategoriesShare from './CategoriesShare'
+
 import * as shopActions from 'store/actions/shop'
 
 import { productCategories } from 'helpers/params'
-import { sortByHighPrice, sortByLowPrice } from 'helpers/math'
 
 import './styles.css'
 
@@ -35,6 +37,9 @@ const Shop = props => {
       `shop.list.${shopId}.productCategories.${choosenCategoryId}.products`,
     ),
   )
+  const shopProductCategoryShare = useSelector(state => 
+    _.get(state, `shop.list.${shopId}.analitics.shopProductCategoryShare`)  
+  )
 
   useEffect(() => {
     _.size(currentShop) && dispatch(shopActions.getAllProductCategories(shopId))
@@ -45,6 +50,12 @@ const Shop = props => {
       dispatch(shopActions.getAllProductsByCategory(shopId, choosenCategory.id))
     }
   }, [choosenCategory, shopId, dispatch, categoryProducts])
+
+  useEffect(() => {
+    if (!_.size(shopProductCategoryShare)) {
+      dispatch(shopActions.getShopAnalitics(shopId))
+    }
+  }, [dispatch, shopProductCategoryShare, shopId])
 
   const renderProductCategories = () => (
     <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -82,63 +93,24 @@ const Shop = props => {
     </Grid>
   )
 
-  const renderProductComposition = productVariations =>
-    _.map(productVariations, variation => {
-      return (
-        <div className="product-composition-variant">{variation.composition}</div>
-      )
-    })
-
-  const renderProduct = product => {
-    return (
-      <div key={product.id} className="product-card-wrapper">
-        <div className="product-image">
-          <img src={product.imageSrc} alt="" />
-          <div className="product-body">
-            <div className="product-name">{product.name}</div>
-            <div className="product-composition">
-              {renderProductComposition(product.productVariation)}
-            </div>
-          </div>
-          <div className="product-price"></div>
-        </div>
-      </div>
-    )
-  }
-
-  const renderCategoryAnalytics = () => {
-    const productsSortedByHighPrice = sortByHighPrice(categoryProducts, categoryProducts.length / 2)
-    const productsSortedByLowPrice = sortByLowPrice(categoryProducts, categoryProducts.length / 2)
-    console.log(productsSortedByHighPrice, productsSortedByLowPrice)
-    return (
-      <Grid container spacing={4}>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Widget disableWidgetMenu>
-            <Typography>Самые доступные товары</Typography>
-            {_.map(productsSortedByLowPrice, product => renderProduct(product))}
-          </Widget>
-        </Grid>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Widget disableWidgetMenu>
-            <Typography>Самые дорогие товары</Typography>
-            {_.map(productsSortedByHighPrice, product =>
-              renderProduct(product),
-            )}
-          </Widget>
-        </Grid>
-      </Grid>
-    )
-  }
 
   return (
     <>
       <PageTitle title={shopName} />
       <Grid container spacing={4}>
+        <CategoriesShare
+          shopProductCategoryShare={shopProductCategoryShare}
+          shopProductCategories={shopProductCategories}
+        />
+      </Grid>
+      <Grid container spacing={4}>
         {renderProductCategories()}
       </Grid>
       {!_.isNil(choosenCategory) &&
         _.size(categoryProducts) &&
-        renderCategoryAnalytics()}
+        <SortByPrice
+          categoryProducts={categoryProducts}
+        />}
     </>
   )
 }

@@ -5,6 +5,7 @@ const product = require('./product/product.service.js');
 const productCategory = require('./product-category/product-category.service.js');
 const productVariation = require('./product-variation/product-variation.service.js');
 const productVariationHistory = require('./product-variation-history/product-variation-history.service.js');
+const analitics = require('./analitics/analitics.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(user);
@@ -14,4 +15,5 @@ module.exports = function (app) {
   app.configure(productCategory);
   app.configure(productVariation);
   app.configure(productVariationHistory);
+  app.configure(analitics);
 };

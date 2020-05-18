@@ -43,7 +43,7 @@ function* getAllProductsByCategory(action) {
         categoryId
       }
     })
-    console.log(products)
+
     yield put(shopActions.getAllProductsByCategorySuccess(shopId, categoryId, products))
   } catch (e) {
     console.log(e)
@@ -51,10 +51,29 @@ function* getAllProductsByCategory(action) {
   }
 }
 
+function* getAnalitics(action) {
+  try {
+    const shopId = action.payload.shopId
+
+    const shopAnalitics = yield backend.service('analitics').find({
+      query: {
+        entityId: shopId,
+        entityType: 'shop'
+      }
+    })
+
+    yield put(shopActions.getShopAnaliticsSuccess(shopId, shopAnalitics.data))
+  } catch (e) {
+    console.log(e)
+    yield put(shopActions.getShopAnaliticsFailure(e))
+  }
+}
+
 function* shopSaga() {
   yield takeEvery(types.SHOP_GET_ALL, getAll)
   yield takeEvery(types.SHOP_GET_ALL_PRODUCT_CATEGORIES, getAllProductCategories)
   yield takeEvery(types.SHOP_GET_ALL_PRODUCTS_BY_CATEGORY, getAllProductsByCategory)
+  yield takeEvery(types.SHOP_GET_ANALITICS, getAnalitics)
 }
 
 export default shopSaga

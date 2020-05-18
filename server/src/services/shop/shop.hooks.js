@@ -110,16 +110,14 @@ module.exports = {
           return values;
         }).catch((error) => {
           hook.result = {
-            status: 500
+            error: error
           };
 
           throw new Error(error);
         });
 
-        hook.result = {
-          status: 200
-        };
-
+        hook.result = query.id;
+        
         return hook;
       }
     ],
@@ -132,7 +130,65 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
+    update: [
+      async hook => {
+        const { app, params } = hook;
+        const sequelizeClient = await app.get('sequelizeClient');
+        
+        const shopId = params.query.id;
+
+        const {
+          productCategory: productCategoryModel,
+          product: productModel,
+        } = sequelizeClient.models;
+
+        const shopProdutCategories = await productCategoryModel.findAll({
+          include: [
+            {
+              model: productModel,
+              as: 'product'
+            }
+          ],
+          where: {
+            shopId: shopId
+          }
+        }).then(res => JSON.parse(JSON.stringify(res)));
+
+        const products = await productModel.findAndCountAll({
+          where: {
+            shopId: shopId
+          }
+        }).then(res => JSON.parse(JSON.stringify(res)));
+
+        const countProduct = products.count;
+
+        const analiticsProductСategorySharePromise = _.map(shopProdutCategories, async (category) => {
+          const sharePercent = await await getSharePercent(_.size(category.product), countProduct);
+          const shareCount = _.size(category.product);
+          
+          return {
+            categoryId: category.id,
+            sharePercent,
+            shareCount
+          };
+        });
+
+        const analiticsProductСategoryShare = await Promise.all(analiticsProductСategorySharePromise).then((shares) => {
+          return shares;
+        }).catch((error) => {
+          console.log(error);
+        });
+
+        await app.service('analitics').create({
+          name: 'shopProductCategoryShare',
+          entityId: shopId,
+          entityType: 'shop',
+          analiticsData: analiticsProductСategoryShare
+        });
+
+        return hook;
+      }
+    ],
     patch: [],
     remove: []
   },
@@ -146,4 +202,15 @@ module.exports = {
     patch: [],
     remove: []
   }
+};
+
+const getSharePercent = (half, all) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const result = half * 100 / all;
+      resolve(result.toFixed(2));
+    } catch(e) {
+      reject(e);
+    }
+  });
 };
