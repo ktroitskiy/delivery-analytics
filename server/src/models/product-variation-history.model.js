@@ -44,6 +44,10 @@ module.exports = function (app) {
   productVariationHistory.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    productVariationHistory.belongsTo(models.productVariation , {
+      foreignKey: 'productVariationId',
+      as: 'productVariationHistory'
+    });
   };
 
   return productVariationHistory;

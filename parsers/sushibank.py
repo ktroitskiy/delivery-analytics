@@ -98,46 +98,46 @@ categories = [
     'url': 'https://www.sushibank.ru/catalog/rolly/',
     'products': [],
   },
-  {
-    'name': 'sety', 
-    'url': 'https://www.sushibank.ru/catalog/sety/',
-    'products': [],
-  },
-  {
-    'name': 'sushi', 
-    'url': 'https://www.sushibank.ru/catalog/sushi/',
-    'products': [],
-  },
-  {
-    'name': 'voki', 
-    'url': 'https://www.sushibank.ru/catalog/voki/',
-    'products': [],
-  },
-  {
-    'name': 'tyakhan', 
-    'url': 'https://www.sushibank.ru/catalog/tyakhan/',
-    'products': [],
-  },
-  {
-    'name': 'napitki', 
-    'url': 'https://www.sushibank.ru/catalog/napitki/',
-    'products': [],
-  },
-  {
-    'name': 'salaty', 
-    'url': 'https://www.sushibank.ru/catalog/salaty/',
-    'products': [],
-  },
-  {
-    'name': 'supy', 
-    'url': 'https://www.sushibank.ru/catalog/supy/',
-    'products': [],
-  },
-  {
-    'name': 'sauces', 
-    'url': 'https://www.sushibank.ru/catalog/sauces/',
-    'products': [],
-  }
+  # {
+  #   'name': 'sety', 
+  #   'url': 'https://www.sushibank.ru/catalog/sety/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'sushi', 
+  #   'url': 'https://www.sushibank.ru/catalog/sushi/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'voki', 
+  #   'url': 'https://www.sushibank.ru/catalog/voki/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'tyakhan', 
+  #   'url': 'https://www.sushibank.ru/catalog/tyakhan/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'napitki', 
+  #   'url': 'https://www.sushibank.ru/catalog/napitki/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'salaty', 
+  #   'url': 'https://www.sushibank.ru/catalog/salaty/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'supy', 
+  #   'url': 'https://www.sushibank.ru/catalog/supy/',
+  #   'products': [],
+  # },
+  # {
+  #   'name': 'sauces', 
+  #   'url': 'https://www.sushibank.ru/catalog/sauces/',
+  #   'products': [],
+  # }
 ]
 
 base_url = 'https://www.sushibank.ru'

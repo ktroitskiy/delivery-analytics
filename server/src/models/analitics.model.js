@@ -5,7 +5,7 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const productCategory = sequelizeClient.define('productCategory', {
+  const analitics = sequelizeClient.define('analitics', {
     id: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
@@ -16,13 +16,17 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    shopId: {
-      type: Sequelize.UUID,
+    entityId: {
+      type: DataTypes.UUID,
       allowNull: false
     },
-    url: {
+    entityType: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
+    },
+    analiticsData: {
+      type: DataTypes.JSONB,
+      allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE
@@ -44,16 +48,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  productCategory.associate = function (models) {
-    productCategory.belongsTo(models.parser, {
-      foreignKey: 'shopId',
-      as: 'shop'
-    });
-    productCategory.hasMany(models.product, {
-      foreignKey: 'categoryId',
-      as: 'product'
-    });
+  analitics.associate = function (models) {
+    // Define associations here
+    // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return productCategory;
+  return analitics;
 };

@@ -1,7 +1,6 @@
 import types from '../constants/product'
 
 const initialState = {
-  list: {},
   total: null,
   error: null
 }
@@ -13,7 +12,6 @@ export default (state = initialState, action) => {
   case types.PRODUCT_GET_ALL_SUCCESS:
     return {
       ...state,
-      list: action.payload.data,
       total: action.payload.total
     }
 
