@@ -1,5 +1,4 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import _ from 'lodash'
 
 import types from '../constants/shop'
 import * as shopActions from '../actions/shop'

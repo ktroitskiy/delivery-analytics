@@ -14,9 +14,6 @@ import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 
 import Dashboard from 'pages/dashboard/Dashboard'
-import Typography from 'pages/typography/Typography'
-import Tables from 'pages/tables/Tables'
-import Charts from 'pages/charts/Charts'
 import Shop from 'pages/shop'
 
 import { useLayoutState } from 'context/LayoutContext'
@@ -32,7 +29,7 @@ function Layout(props) {
     _.isNil(shopsTotal) && dispatch(shopActions.getAll())
     _.isNil(productCategoriesTotal) && dispatch(productCategoryActions.getAll())
     _.isNil(productsTotal) && dispatch(productActions.getAll())
-  }, [])
+  })
 
   var classes = useStyles()
 
@@ -52,9 +49,6 @@ function Layout(props) {
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
-            <Route path="/app/typography" component={Typography} />
-            <Route path="/app/tables" component={Tables} />
-            <Route path="/app/ui/charts" component={Charts} />
             <Route path="/app/shop/:id" component={Shop} />
           </Switch>
         </div>

@@ -61,7 +61,7 @@ const CategoriesShare = props => {
 
     return (
       <g>
-        <text x={cx} y={cy} dy={8} font-size="22" textAnchor="middle" fill={fill}>
+        <text x={cx} y={cy} dy={8} fontSize="22" textAnchor="middle" fill={fill}>
           {payload.name}
         </text>
         <Sector
@@ -126,7 +126,7 @@ const CategoriesShare = props => {
             onMouseEnter={onPieEnter}
           >
             {
-          	  data.map((entry, index) => <Cell fill={entry.color}/>)
+          	  data.map((entry, index) => <Cell key={entry.color} fill={entry.color}/>)
             }
           </Pie>
         </PieChart>
