@@ -5,9 +5,6 @@ import _ from 'lodash'
 import { Drawer, IconButton, List } from '@material-ui/core'
 import {
   Home as HomeIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
-  BorderAll as TableIcon,
   ArrowBack as ArrowBackIcon,
 } from '@material-ui/icons'
 import { useTheme } from '@material-ui/styles'
@@ -26,21 +23,7 @@ import useStyles from './styles'
 
 const structure = [
   { id: 0, label: 'Dashboard', link: '/app/dashboard', icon: <HomeIcon /> },
-  {
-    id: 1,
-    label: 'Typography',
-    link: '/app/typography',
-    icon: <TypographyIcon />,
-  },
-  { id: 2, label: 'Tables', link: '/app/tables', icon: <TableIcon /> },
-  {
-    id: 4,
-    label: 'UI Elements',
-    link: '/app/ui',
-    icon: <UIElementsIcon />,
-    children: [{ label: 'Charts', link: '/app/ui/charts' }],
-  },
-  { id: 5, type: 'divider' },
+  { id: 1, type: 'divider' },
 ]
 
 const Sidebar = ({ location }) => {
@@ -75,7 +58,7 @@ const Sidebar = ({ location }) => {
   const listShops = useSelector((state) => _.get(state, 'shop.list'))
 
   _.map(listShops, (shop) => {
-    if(!_.size(_.find(structure, (item) => item.id === shop.id))) {
+    if(!_.size(_.find(structure, (item) => item.id === shop.id)) && shop.id) {
       structure.push({
         id: shop.id,
         label: shop.name,
@@ -83,8 +66,6 @@ const Sidebar = ({ location }) => {
       })
     }
   })
-
-
 
   return (
     <Drawer

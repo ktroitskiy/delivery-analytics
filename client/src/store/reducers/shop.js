@@ -53,6 +53,7 @@ export default (state = initialState, action) => {
         list: { 
           ...state.list,
           [action.payload.shopId]: {
+            ...state.list[action.payload.shopId],
             analitics: {
               ...analiticsData
             }
